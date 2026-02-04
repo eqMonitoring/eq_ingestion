@@ -1,0 +1,102 @@
+[project]
+name = "idfm-data-collection"
+version = "0.1.0"
+description = ""
+authors = [
+    { name = "Matthieu De Verdiere", email = "matthieu.cdv@gmail.com" }
+]
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "pandas>=2.3.0,<3.0.0",
+    "requests>=2.32.4,<3.0.0",
+    "responses>=0.25.8,<1.0.0",
+    "python-opensky>=1.0.1,<2.0.0",
+    "google-cloud-storage>=3.1.1,<4.0.0",
+    "google-cloud-resource-manager>=1.15.0,<2.0.0",
+    "python-dotenv>=1.2.1,<2.0.0",
+    "apache-airflow>=3.1.3,<4.0.0",
+    "apache-airflow-providers-google>=19.0.0,<20.0.0",
+    "apache-airflow-providers-dbt-cloud>=4.6.0,<5.0.0",
+    "google-cloud-bigquery>=3.34.0,<4.0.0",
+    "dbt-bigquery>=1.10.3,<2.0.0",
+    "airflow-dbt>=0.4.0,<1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit==4.2.0",
+    "pytest>=8.4.1,<9.0.0",
+    "pytest-mock>=3.15.1,<4.0.0",
+    "pytest-cov>=7.0.0,<8.0.0",
+    "flake8>=7.3.0,<8.0.0",
+    "bandit>=1.8.5,<2.0.0",
+    "pylint>=3.3.7,<4.0.0",
+    "astroid>=3.0.0,<4.0.0",
+    "black>=25.1.0,<26.0.0",
+    "mypy>=1.16.1,<2.0.0",
+    "pyupgrade>=3.20.0,<4.0.0",
+    "ruff>=0.14.10,<0.15.0",
+    "types-requests>=2.32.4.20250913,<3.0.0",
+    "openmeteo-requests>=1.7.4,<2.0.0",
+    "requests-cache>=1.2.1,<2.0.0",
+    "retry-requests>=2.0.0,<3.0.0",
+    "psycopg2-binary>=2.9.11,<3.0.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 88
+exclude = [
+    ".git",
+    ".mypy_cache",
+    ".ruff_cache",
+]
+
+[tool.ruff.lint]
+select = [
+  "E", "F",        # basic errors
+  "W",             # warnings
+  "N",             # pep8-naming
+  "I",             # imports (isort)
+  "B",             # bugbear
+  "UP",            # pyupgrade
+  "C4",            # comprehensions
+  "SIM",           # simplifications
+  "PL",            # pylint rules
+]
+
+ignore = [
+  "PLR0913",  # trop d'arguments (équivalent pylint)
+]
+
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["idfm_data_collection"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+markers = [
+    "unit", # mark a test as unit test
+    "integration", # mark a test as integration test
+]
+addopts = [
+    "--cov=idfm_data_collection",
+    "--cov-report=term-missing",
+    "--cov-report=xml",
+]
+
+[tool.coverage.report]
+fail_under = 80
+skip_empty = true
