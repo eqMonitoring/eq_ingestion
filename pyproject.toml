@@ -21,6 +21,8 @@ dependencies = [
     "google-cloud-bigquery>=3.34.0,<4.0.0",
     "dbt-bigquery>=1.10.3,<2.0.0",
     "airflow-dbt>=0.4.0,<1.0.0",
+    "dlt>=1.21.0",
+    "dlt[duckdb]",
 ]
 
 [project.optional-dependencies]
